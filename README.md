@@ -1,0 +1,1 @@
+## Cursor Live Competition
