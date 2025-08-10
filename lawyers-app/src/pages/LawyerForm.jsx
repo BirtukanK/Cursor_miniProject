@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import type { FormEvent } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { saveLawyer } from '../services/storage'
 
@@ -8,12 +7,12 @@ function LawyerForm() {
   const [name, setName] = useState('')
   const [expertise, setExpertise] = useState('Corporate Law')
   const [location, setLocation] = useState('')
-  const [experienceYears, setExperienceYears] = useState<number>(0)
-  const [pricePerHour, setPricePerHour] = useState<number>(0)
+  const [experienceYears, setExperienceYears] = useState(0)
+  const [pricePerHour, setPricePerHour] = useState(0)
   const [description, setDescription] = useState('')
-  const [error, setError] = useState<string | null>(null)
+  const [error, setError] = useState(null)
 
-  function handleSubmit(event: FormEvent) {
+  function handleSubmit(event) {
     event.preventDefault()
     setError(null)
 

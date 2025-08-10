@@ -1,10 +1,9 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { getLawyers, deleteLawyer } from '../services/storage'
-import type { Lawyer } from '../types'
 
 function useLawyers() {
-  const [lawyers, setLawyers] = useState<Lawyer[]>([])
+  const [lawyers, setLawyers] = useState([])
   useEffect(() => {
     setLawyers(getLawyers())
   }, [])
@@ -13,12 +12,12 @@ function useLawyers() {
 
 function LawyerList() {
   const { lawyers, refresh } = useLawyers()
-  const [category, setCategory] = useState<string>('All')
-  const [locationQuery, setLocationQuery] = useState<string>('')
-  const [sortBy, setSortBy] = useState<'price' | 'experience'>('price')
+  const [category, setCategory] = useState('All')
+  const [locationQuery, setLocationQuery] = useState('')
+  const [sortBy, setSortBy] = useState('price')
 
   const categories = useMemo(() => {
-    const set = new Set<string>(lawyers.map(l => l.expertise))
+    const set = new Set(lawyers.map(l => l.expertise))
     return ['All', ...Array.from(set).sort()]
   }, [lawyers])
 
@@ -39,7 +38,7 @@ function LawyerList() {
     return list
   }, [lawyers, category, locationQuery, sortBy])
 
-  function handleDelete(id: string) {
+  function handleDelete(id) {
     deleteLawyer(id)
     refresh()
   }
@@ -66,7 +65,7 @@ function LawyerList() {
         </div>
         <div className="field">
           <label>Sort by</label>
-          <select value={sortBy} onChange={e => setSortBy(e.target.value as any)}>
+          <select value={sortBy} onChange={e => setSortBy(e.target.value)}>
             <option value="price">Lowest price</option>
             <option value="experience">Most experienced</option>
           </select>
